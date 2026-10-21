@@ -65,7 +65,7 @@ public class PrepararItens implements Etapa {
                     continue;
                 }
                 BigDecimal preco = Sql.decimal(it.get("precoUnitario")).setScale(2, RoundingMode.HALF_UP);
-                BigDecimal precoErp = Sql.umDecimal(c, "select preco from erp.fn_preco_vigente(?::smallint, ?)", empresa, produto.get())
+                BigDecimal precoErp = Sql.umDecimal(c, "select preco from erp.fn_preco_vigente(?::smallint, ?::int)", empresa, produto.get())
                         .orElse(preco);
                 if (precoErp.subtract(preco).abs().compareTo(new BigDecimal("0.01")) > 0) {
                     precoDivergente++;

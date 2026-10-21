@@ -47,6 +47,16 @@ class IntegracaoSiteMercadoTest {
         return given().post(EXECUTAR).then().statusCode(200).extract().as(ResumoExecucao.class);
     }
 
+    /** Executa e, se não der OK, falha mostrando o log das etapas (diagnóstico no CI). */
+    private ResumoExecucao executarOk() {
+        ResumoExecucao r = executar();
+        if (!"OK".equals(r.status())) {
+            String log = given().get("/integrador/execucoes/" + r.execucao()).then().extract().asString();
+            throw new AssertionError("execução " + r.status() + ": " + log);
+        }
+        return r;
+    }
+
     private Map<String, Object> noSimulador(String id) {
         List<Map<String, Object>> todos = given().get("/sitemercado/_simulador/pedidos").then().extract().jsonPath().getList("$");
         return todos.stream().filter(p -> id.equals(p.get("id"))).findFirst().orElseThrow();
@@ -83,8 +93,7 @@ class IntegracaoSiteMercadoTest {
         Map<String, Object> retirada = gerar("RETIRADA", 1).get(0);
         Map<String, Object> emSeparacao = gerar("EM_SEPARACAO", 1).get(0);
 
-        ResumoExecucao r = executar();
-        assertEquals("OK", r.status());
+        ResumoExecucao r = executarOk();
         assertEquals(4, r.itensOk());
 
         for (Map<String, Object> p : List.of(normais.get(0), normais.get(1), pesavel, retirada)) {
@@ -114,7 +123,7 @@ class IntegracaoSiteMercadoTest {
                   join erp.produto_embalagem e on e.produto_id = pl.produto_id and e.ean = ?
                  where pl.empresa_id = 2""";
         BigDecimal antes = decimal(saldo, item.get("ean"));
-        assertEquals("OK", executar().status());
+        executarOk();
         BigDecimal depois = decimal(saldo, item.get("ean"));
         assertEquals(0, antes.subtract(new BigDecimal(item.get("quantidadeSeparada").toString())).compareTo(depois));
     }
@@ -142,7 +151,7 @@ class IntegracaoSiteMercadoTest {
     void itemEmFaltaEPrecoPromocionalDoSite() throws Exception {
         Map<String, Object> falta = gerar("ITEM_EM_FALTA", 1).get(0);
         Map<String, Object> promo = gerar("PRECO_PROMOCIONAL", 1).get(0);
-        assertEquals("OK", executar().status());
+        executarOk();
         int itensNoSite = ((List<?>) falta.get("itens")).size();
         assertEquals(itensNoSite - 1, contar("""
                 select count(*) from erp.pedido_venda_item i join erp.pedido_venda v on v.id = i.pedido_venda_id
@@ -155,8 +164,7 @@ class IntegracaoSiteMercadoTest {
     void instabilidadeDaApiEhSuperadaPorRetentativa() {
         gerar("NORMAL", 1);
         given().post("/sitemercado/_simulador/falhas?quantidade=2").then().statusCode(204);
-        ResumoExecucao r = executar();
-        assertEquals("OK", r.status());
+        ResumoExecucao r = executarOk();
         assertEquals(1, r.itensOk());
         List<Map<String, Object>> etapas = given().get("/integrador/execucoes/" + r.execucao()).then().extract().jsonPath().getList("etapas");
         assertEquals(2, etapas.stream().filter(e -> "RETENTATIVA".equals(e.get("status"))).count());
@@ -165,7 +173,7 @@ class IntegracaoSiteMercadoTest {
     @Test
     void confirmacaoPerdidaNaoDuplicaPedido() throws Exception {
         String id = (String) gerar("NORMAL", 1).get(0).get("id");
-        assertEquals(1, executar().itensOk());
+        assertEquals(1, executarOk().itensOk());
         String numeroErp = (String) noSimulador(id).get("numeroErp");
 
         // a plataforma "perde" a confirmação e devolve o pedido como não integrado
