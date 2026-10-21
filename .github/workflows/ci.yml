@@ -44,3 +44,34 @@ jobs:
         env:
           DATABASE_URL: postgresql://painel_s4:painel_s4@localhost/postgres
         run: pip install -q -e ".[dev]" && pytest -q
+
+  java-s2:
+    name: S2 (integrador Quarkus)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Cliente PostgreSQL
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+      - name: S1 · carga reduzida (escala 0.2)
+        run: ./s1-mini-erp-postgres/scripts/carregar.sh 0.2
+      - name: S2 · compilar e testar
+        working-directory: s2-integrador-etl
+        run: mvn -B -ntp verify

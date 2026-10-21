@@ -1,0 +1,60 @@
+# Grupo de processos no estilo do Sysmo Integrador:
+#   [SITEMERCADO/IFOOD] API NOVA – importa pedidos do e-commerce para o ERP
+# Cada etapa é um componente reutilizável (campo "tipo"); a ordem, os parâmetros,
+# a política de retentativa e as condições ficam aqui, sem recompilar o integrador.
+nome: SITEMERCADO_PEDIDOS
+descricao: "[SITEMERCADO/IFOOD] API NOVA - pedidos com separação finalizada entram como pedido de venda"
+agendado: true
+variaveis:
+  empresa_id: 2                 # loja dona da conta no SiteMercado (cadastro do webservice no Sgr101-like)
+  webservice: SITEMERCADO
+  origem: SITEMERCADO
+  status_importar: SEPARACAO_FINALIZADA
+
+etapas:
+  - nome: BUSCAR WEBSERVICE
+    tipo: buscar-webservice
+    parametros:
+      empresa: "${empresa_id}"
+      nome: "${webservice}"
+
+  - nome: LOGIN NA API
+    tipo: autenticar-api
+    retentativas: 3
+    intervaloMs: 300
+
+  - nome: LISTAR PEDIDOS
+    tipo: listar-pedidos
+    retentativas: 3
+    intervaloMs: 300
+    parametros:
+      status: "${status_importar}"
+
+  - nome: PROCESSAR PEDIDOS
+    paraCada: pedidos           # um erro num pedido não impede os outros
+    como: pedido
+    etapas:
+      - nome: EXTRAIR LOJA
+        tipo: extrair-loja
+      - nome: EXTRAIR CLIENTE
+        tipo: extrair-cliente
+      - nome: EXTRAIR ENDERECO
+        tipo: extrair-endereco
+      - nome: VERIFICAR DUPLICIDADE
+        tipo: verificar-duplicidade
+      - nome: SALVAR CLIENTE
+        tipo: salvar-cliente
+        executarSe: "!ja_integrado"
+      - nome: PREPARAR CABECALHO
+        tipo: preparar-cabecalho
+        executarSe: "!ja_integrado"
+      - nome: PREPARAR ITENS
+        tipo: preparar-itens
+        executarSe: "!ja_integrado"
+      - nome: GRAVAR PEDIDO
+        tipo: gravar-pedido
+        executarSe: "!ja_integrado"
+      - nome: CONFIRMAR INTEGRACAO
+        tipo: confirmar-integracao
+        retentativas: 3
+        intervaloMs: 300
