@@ -74,4 +74,7 @@ jobs:
         run: ./s1-mini-erp-postgres/scripts/carregar.sh 0.2
       - name: S2 · compilar e testar
         working-directory: s2-integrador-etl
-        run: mvn -B -ntp verify
+        run: mvn -B -ntp verify 2>&1 | tee ../mvn-s2.log; exit ${PIPESTATUS[0]}
+      - name: S2 · resumo da falha
+        if: failure()
+        run: ./.github/resumo-falha.sh mvn-s2.log s2-integrador-etl/target/surefire-reports
