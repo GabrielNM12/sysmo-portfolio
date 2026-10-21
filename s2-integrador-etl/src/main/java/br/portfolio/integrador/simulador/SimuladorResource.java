@@ -22,7 +22,6 @@ import java.util.Map;
 /** API simulada da plataforma de e-commerce (o "lado de lá" da integração). */
 @Path("/sitemercado")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Simulador de e-commerce")
 public class SimuladorResource {
 
@@ -53,6 +52,7 @@ public class SimuladorResource {
 
     @POST
     @Path("/oauth/token")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response token(Map<String, String> corpo) {
         Response r = bloqueio(null, false);
         if (r != null) {
@@ -74,6 +74,7 @@ public class SimuladorResource {
 
     @POST
     @Path("/v1/pedidos/{id}/integracao")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response confirmar(@HeaderParam("Authorization") String auth, @PathParam("id") String id, Map<String, String> corpo) {
         Response r = bloqueio(auth, true);
         if (r != null) {
