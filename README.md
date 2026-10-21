@@ -1,5 +1,7 @@
 # Portfólio · domínio de ERP para supermercados (estilo Sysmo S1)
 
+[![CI](https://github.com/GabrielNM12/sysmo-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/GabrielNM12/sysmo-portfolio/actions/workflows/ci.yml)
+
 Projetos práticos para demonstrar conhecimento do **varejo alimentar** e do tipo de integração que gira em torno de ERPs de supermercado como o **Sysmo S1**: modelo de dados de rede com CD e lojas, PDV/NFC-e, estoque com custo médio, balanças, integração com e-commerce, BI de ruptura e recebimento de mercadorias.
 
 > Projetos independentes, com dados 100% sintéticos e marcas fictícias. Não há afiliação com a Sysmo Sistemas nem uso de código ou banco do Sysmo S1; o vocabulário (transacionador, Sgr101, grupos de processos do Integrador) vem de material público.
@@ -7,10 +9,10 @@ Projetos práticos para demonstrar conhecimento do **varejo alimentar** e do tip
 | Projeto | O que mostra | Stack | Situação |
 |---|---|---|---|
 | [S1 · Mini-ERP de supermercado](s1-mini-erp-postgres/) | Modelagem de rede com CD, 1 milhão de itens vendidos, livro-razão de estoque com custo médio móvel, NFC-e, perfis de acesso LGPD, 12 consultas analíticas | PostgreSQL 16, SQL/PLpgSQL | ✅ |
-| [S2 · Integrador ETL](s2-integrador-etl/) | Motor de "grupos de processos" em YAML, etapas reutilizáveis, retentativa com backoff, log por etapa, idempotência; integração de pedidos de e-commerce | Java 21, Quarkus, PostgreSQL | 🚧 |
+| [S2 · Integrador ETL](s2-integrador-etl/) | Motor de "grupos de processos" em YAML, etapas reutilizáveis, retentativa com backoff, log por etapa, idempotência; integração de pedidos de e-commerce | Java 21, Quarkus, PostgreSQL | ✅ |
 | [S3 · Balança e etiquetas](s3-balanca-etiquetas/) | Carga Toledo MGV6 e Filizola, EAN de balança com preço/peso embutido, GS1-128, etiquetas de gôndola | Python, ReportLab | ✅ |
 | [S4 · Painel de ruptura e margem](s4-painel-ruptura/) | Ruptura estatística (Poisson), estoque fantasma, margem corroída por reajuste, validade com projeção FEFO, alertas no Telegram | Python, FastAPI, Chart.js | ✅ |
-| S5 · Portal de agendamento de recebimento | Fornecedor agenda doca e envia XML da NF-e; confronto pedido de compra × nota | Java 21, Quarkus, React | 🚧 |
+| [S5 · Portal de recebimento](s5-portal-recebimento/) | Fornecedor agenda doca e envia o XML da NF-e; confronto pedido de compra × nota (caixa × unidade, preço, NCM, CFOP), proteção XXE, agenda do CD | Java 21, Quarkus, React | ✅ |
 
 Todos usam a base do **S1** como ERP de laboratório, cada um com seu usuário de banco de menor privilégio.
 
@@ -28,7 +30,7 @@ flowchart LR
 
 ## Rodando tudo
 
-Requisitos: PostgreSQL 14+ (ou Docker), Python 3.10+, Java 21 + Maven.
+Requisitos: PostgreSQL 14+ (ou Docker), Python 3.10+, Java 21 + Maven 3.9, Node 20+.
 
 ```bash
 # banco de laboratório
@@ -39,6 +41,12 @@ export PGHOST=localhost PGUSER=postgres PGPASSWORD=postgres PGDATABASE=postgres
 # S3 e S4
 pip install -e "s3-balanca-etiquetas[dev]" -e "s4-painel-ruptura[dev]"
 DATABASE_URL=postgresql://painel_s4:painel_s4@localhost/postgres painel servidor   # http://localhost:8040
+
+# S2 e S5
+(cd s2-integrador-etl && mvn quarkus:dev)                                           # http://localhost:8089
+(cd s5-portal-recebimento/frontend && npm ci && npm run build) && (cd s5-portal-recebimento && mvn quarkus:dev)   # http://localhost:8090
 ```
 
-O CI (GitHub Actions) sobe um PostgreSQL, carrega o S1 em escala completa, roda as verificações de integridade e os testes de todos os projetos.
+Cada projeto tem seu README com as decisões de domínio, o que é testado e exemplos de uso.
+
+O CI (GitHub Actions) sobe um PostgreSQL, carrega o S1, roda as verificações de integridade e os testes de todos os projetos: 28 em Python no S3, 12 no S4, 21 em Java no S2 e 15 no S5, incluindo testes ponta a ponta contra o banco.
