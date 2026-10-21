@@ -15,3 +15,5 @@ dist/
 .vscode/
 *.iml
 .DS_Store
+# build do front-end do S5 (gerado pelo Vite dentro dos recursos do Quarkus)
+s5-portal-recebimento/src/main/resources/META-INF/resources/

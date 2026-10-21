@@ -6,6 +6,9 @@
 set search_path = erp, public;
 select set_config('client_min_messages', 'warning', false);
 
+-- schemas dos sistemas satélite (logs e agendas de laboratório) são recriados junto com os perfis
+drop schema if exists integrador, portal cascade;
+
 do $$
 declare r text;
 begin
@@ -59,8 +62,11 @@ create schema integrador authorization integrador_s2;
 create role portal_s5 login password 'portal_s5';
 alter role portal_s5 set search_path = erp;
 grant usage on schema erp to portal_s5;
-grant select on empresa, produto, produto_embalagem, produto_loja, pedido_compra, pedido_compra_item to portal_s5;
+grant select on empresa, secao, produto, produto_embalagem, produto_loja, pedido_compra, pedido_compra_item to portal_s5;
 grant select (id, tipo_pessoa, cpf_cnpj, nome, nome_fantasia, is_fornecedor) on transacionador to portal_s5;
 grant select, insert, update on nota_entrada, nota_entrada_item to portal_s5;
 grant update (status) on pedido_compra to portal_s5;
+grant update (quantidade_recebida) on pedido_compra_item to portal_s5;
+-- schema próprio do portal: docas, agendamentos e acessos de fornecedores
+create schema portal authorization portal_s5;
 grant usage on all sequences in schema erp to portal_s5;

@@ -1,0 +1,70 @@
+:root { --azul:#14365c; --azul2:#1f4f86; --fundo:#f3f5f8; --linha:#dfe5ec; --texto:#1b2633; --suave:#5d6b7b;
+        --verde:#2e7d32; --vermelho:#c62828; --laranja:#b45309; --frio:#0369a1; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: var(--fundo); color: var(--texto); }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; border: 1px solid var(--linha); background: #fff; border-radius: 8px; padding: 8px 14px; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button.primario { background: var(--azul); border-color: var(--azul); color: #fff; font-weight: 600; }
+button.pequeno { padding: 4px 10px; font-size: 13px; }
+button.link { background: none; border: none; color: var(--azul2); padding: 4px 6px; text-decoration: underline; }
+.topo { background: var(--azul); color: #fff; display: flex; align-items: center; gap: 24px; padding: 12px 24px; flex-wrap: wrap; }
+.marca { font-weight: 700; font-size: 18px; } .marca span { font-weight: 400; opacity: .7; margin-left: 6px; }
+.topo nav { display: flex; gap: 6px; flex: 1; }
+.topo nav button { background: transparent; color: #fff; border-color: transparent; }
+.topo nav button.ativo { background: rgba(255,255,255,.15); }
+.usuario { font-size: 14px; } .usuario .link { color: #cfe0f5; }
+main { max-width: 1180px; margin: 0 auto; padding: 24px; }
+h2 { margin: 6px 0 4px; } h2 small { color: var(--suave); font-weight: 400; font-size: 16px; margin-left: 6px; }
+h3 { margin: 0 0 12px; font-size: 16px; }
+.sub { color: var(--suave); margin: 0 0 16px; }
+.cartao { background: #fff; border: 1px solid var(--linha); border-radius: 12px; padding: 18px; margin-bottom: 16px; overflow-x: auto; }
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.cartao.pedido { text-align: left; display: flex; flex-direction: column; gap: 6px; margin: 0; }
+.cartao.pedido:hover { border-color: var(--azul2); }
+.linha { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.destino { font-size: 15px; } .suave { color: var(--suave); font-size: 13px; }
+.selo { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; background: #eef2f6; margin-left: 6px; text-transform: lowercase; }
+.selo.frio { background: #e0f2fe; color: var(--frio); }
+.s-APROVADA { background: #e8f5e9; color: var(--verde); } .s-APROVADA_COM_RESSALVAS { background: #fff4e0; color: var(--laranja); }
+.s-BLOQUEADA { background: #fdecec; color: var(--vermelho); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; color: var(--suave); font-weight: 600; padding: 6px 8px; border-bottom: 2px solid var(--linha); }
+td { padding: 7px 8px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+.num { text-align: right; white-space: nowrap; } .mono { font-family: ui-monospace, monospace; font-size: 12px; }
+tr.linha-erro td { background: #fdecec; }
+.passos { display: grid; gap: 0; }
+.acoes { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.botao { border: 1px dashed var(--azul2); color: var(--azul2); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+textarea { width: 100%; font-family: ui-monospace, monospace; font-size: 12px; border: 1px solid var(--linha); border-radius: 8px; padding: 10px; margin-bottom: 10px; }
+.resultado { margin-top: 16px; }
+.status { display: inline-block; font-weight: 700; padding: 6px 14px; border-radius: 8px; margin-bottom: 8px; }
+.divergencias { list-style: none; padding: 0; margin: 0 0 14px; }
+.divergencias li { padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; font-size: 14px; }
+.divergencias li.bloqueia { background: #fdecec; } .divergencias li.alerta-item { background: #fff4e0; }
+.agenda { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0 16px; }
+.doca { border: 1px solid var(--linha); border-radius: 10px; padding: 10px; display: grid; gap: 6px; min-width: 110px; }
+.nome-doca { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.slot { padding: 6px; } .slot.escolhido { background: var(--azul); color: #fff; border-color: var(--azul); }
+.slot:disabled { text-decoration: line-through; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--suave); margin-bottom: 12px; }
+label.inline { flex-direction: row; align-items: center; gap: 8px; }
+input, select { border: 1px solid var(--linha); border-radius: 8px; padding: 8px 10px; background: #fff; color: var(--texto); }
+.alerta { padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 14px; }
+.alerta.erro { background: #fdecec; color: var(--vermelho); } .alerta.ok { background: #e8f5e9; color: var(--verde); }
+.alerta.aviso { background: #fff4e0; color: var(--laranja); }
+.vazio { color: var(--suave); padding: 24px; text-align: center; } .vazio.pequeno { padding: 8px; font-size: 13px; }
+.login { min-height: 100vh; display: grid; place-items: center; padding: 16px;
+         background: linear-gradient(135deg, #14365c 0%, #1f4f86 100%); }
+.login .cartao { width: 100%; max-width: 400px; padding: 28px; }
+.login h1 { margin: 0 0 6px; font-size: 22px; color: var(--azul); }
+.login .primario { width: 100%; padding: 10px; margin-top: 4px; }
+.abas { display: flex; gap: 6px; margin-bottom: 16px; }
+.abas button { flex: 1; } .abas button.ativo { background: #eef3fa; border-color: var(--azul2); color: var(--azul); font-weight: 600; }
+.dica { font-size: 12px; color: var(--suave); margin: 14px 0 0; }
+.filtros { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.docas-operacao { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.coluna-doca { margin: 0; }
+.entrega { border: 1px solid var(--linha); border-left: 4px solid var(--azul2); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; font-size: 14px; display: grid; gap: 4px; }
+.entrega.st-RECEBIDO { border-left-color: var(--verde); opacity: .75; } .entrega.st-NAO_COMPARECEU { border-left-color: var(--vermelho); opacity: .6; }
+@media (max-width: 640px) { main { padding: 14px; } .topo { gap: 10px; } }

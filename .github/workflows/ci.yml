@@ -78,3 +78,43 @@ jobs:
       - name: S2 · resumo da falha
         if: failure()
         run: ./.github/resumo-falha.sh mvn-s2.log s2-integrador-etl/target/surefire-reports
+
+  java-s5:
+    name: S5 (portal Quarkus + React)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Cliente PostgreSQL
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+      - name: S1 · carga reduzida (escala 0.2)
+        run: ./s1-mini-erp-postgres/scripts/carregar.sh 0.2
+      - name: S5 · build do front-end
+        working-directory: s5-portal-recebimento/frontend
+        run: npm ci && npm run build
+      - name: S5 · compilar e testar
+        working-directory: s5-portal-recebimento
+        run: mvn -B -ntp verify 2>&1 | tee ../mvn-s5.log; exit ${PIPESTATUS[0]}
+      - name: S5 · resumo da falha
+        if: failure()
+        run: ./.github/resumo-falha.sh mvn-s5.log s5-portal-recebimento/target/surefire-reports
