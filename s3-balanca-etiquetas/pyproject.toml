@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "balanca-carga"
+version = "1.0.0"
+description = "Carga de itens para balanças (Toledo MGV6, Filizola), leitura de códigos de balança/GS1-128 e etiquetas de gôndola"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["reportlab>=4.0"]
+
+[project.optional-dependencies]
+erp = ["psycopg[binary]>=3.1"]
+dev = ["pytest>=8", "psycopg[binary]>=3.1"]
+
+[project.scripts]
+balanca = "balanca.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["balanca*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

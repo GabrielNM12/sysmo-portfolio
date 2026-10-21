@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block titulo %}{{ loja.fantasia }} · Painel{% endblock %}
+{% block conteudo %}
+<p class="voltar"><a href="/">← rede</a></p>
+<h1>{{ loja.fantasia }} <small>{{ loja.cidade }}</small></h1>
+
+<section class="kpis">
+  <div class="kpi"><span>Venda ontem</span><b>{{ kpis.venda_ontem | moeda }}</b>
+    {% if kpis.venda_semana_passada %}{% set var = (kpis.venda_ontem / kpis.venda_semana_passada - 1) * 100 %}
+    <em class="{{ 'pos' if var >= 0 else 'neg' }}">{{ ('%+.1f' % var) | replace('.', ',') }}% vs. mesmo dia da semana passada</em>{% endif %}</div>
+  <div class="kpi"><span>Margem bruta 30 dias</span><b>{{ kpis.margem_30d | pct }}</b><em>{{ kpis.venda_30d | moeda }} vendidos</em></div>
+  <div class="kpi alerta"><span>Venda perdida com ruptura</span><b>{{ resumo.venda_perdida | moeda }}</b><em>desde que o item parou de vender</em></div>
+  <div class="kpi alerta"><span>Prejuízo de margem / mês</span><b>{{ resumo.prejuizo_margem_mes | moeda }}</b><em>se nada mudar</em></div>
+  <div class="kpi"><span>Perecível que deve sobrar</span><b>{{ resumo.validade_em_risco | moeda }}</b><em>a custo, próximos 5 dias</em></div>
+</section>
+
+<section class="duas">
+  <div class="painel">
+    <h2>Venda diária e margem · 6 semanas</h2>
+    <canvas id="grafico" height="120"></canvas>
+  </div>
+  <div class="painel">
+    <h2>Departamentos · 30 dias</h2>
+    <table class="compacta">
+      <tr><th>Departamento</th><th class="num">Venda</th><th class="num">Margem</th></tr>
+      {% for d in departamentos %}<tr><td>{{ d.departamento }}</td><td class="num">{{ d.venda | moeda }}</td><td class="num">{{ d.margem | pct }}</td></tr>{% endfor %}
+    </table>
+  </div>
+</section>
+
+<section class="painel">
+  <div class="cab-alertas">
+    <h2>Alertas ({{ total_filtrado }})</h2>
+    <nav class="filtros">
+      <a href="/loja/{{ loja.id }}" class="{{ 'ativo' if not tipo }}">Todos {{ resumo.total }}</a>
+      {% for t, n in resumo.por_tipo.items() %}<a href="?tipo={{ t }}" class="{{ 'ativo' if tipo == t }}">{{ NOME_TIPO[t] }} {{ n }}</a>{% endfor %}
+      <a href="/lojas/{{ loja.id }}/alertas.csv" class="exportar">Exportar CSV</a>
+    </nav>
+  </div>
+  <table>
+    <tr><th></th><th>Tipo</th><th>Produto</th><th>O que está acontecendo</th><th>Ação sugerida</th><th class="num">Impacto</th></tr>
+    {% for a in alertas %}
+    <tr>
+      <td><span class="sev s-{{ a.severidade.name }}" title="{{ a.severidade.name }}"></span></td>
+      <td><span class="selo t-{{ a.tipo }}">{{ NOME_TIPO[a.tipo] }}</span></td>
+      <td><b>{{ a.descricao }}</b><br><small>cód. {{ a.produto_id }}</small></td>
+      <td>{{ a.mensagem }}</td>
+      <td>{{ a.acao }}</td>
+      <td class="num">{{ a.impacto | moeda }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<script src="/static/chart.umd.min.js"></script>  <!-- Chart.js 4.4.1 (MIT) servido localmente: painel funciona na intranet da loja sem internet -->
+<script>
+  const serie = {{ serie | tojson }};
+  new Chart(document.getElementById('grafico'), {
+    data: {
+      labels: serie.map(s => s.dia.slice(8, 10) + '/' + s.dia.slice(5, 7)),
+      datasets: [
+        {type: 'bar', label: 'Venda (R$)', data: serie.map(s => Number(s.venda)), backgroundColor: '#9db7d5', yAxisID: 'y'},
+        {type: 'line', label: 'Margem (%)', data: serie.map(s => Number(s.margem)), borderColor: '#c2410c',
+         pointRadius: 0, tension: .3, yAxisID: 'y1'}
+      ]
+    },
+    options: {responsive: true, interaction: {mode: 'index', intersect: false},
+      scales: {y: {position: 'left'}, y1: {position: 'right', suggestedMin: 0, suggestedMax: 40, grid: {drawOnChartArea: false}}}}
+  });
+</script>
+{% endblock %}

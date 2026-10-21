@@ -1,0 +1,4 @@
+# arquivos de carga de balança: CRLF e largura fixa preservados byte a byte
+*.TXT -text
+*.pdf binary
+*.png binary

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-sql:
+    name: S1 (SQL) · S3 (balança) · S4 (painel)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cliente PostgreSQL
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+      - name: S1 · carga completa (escala 1)
+        run: ./s1-mini-erp-postgres/scripts/carregar.sh 1
+      - name: S1 · verificações de integridade
+        run: psql -v ON_ERROR_STOP=1 -f s1-mini-erp-postgres/testes/verificacoes.sql
+      - name: S1 · consultas analíticas
+        run: for f in s1-mini-erp-postgres/consultas/*.sql; do psql -X -v ON_ERROR_STOP=1 -f "$f" > /dev/null; done
+      - name: S3 · testes
+        working-directory: s3-balanca-etiquetas
+        env:
+          DATABASE_URL: postgresql://balanca_s3:balanca_s3@localhost/postgres
+        run: pip install -q -e ".[dev]" && pytest -q
+      - name: S4 · testes
+        working-directory: s4-painel-ruptura
+        env:
+          DATABASE_URL: postgresql://painel_s4:painel_s4@localhost/postgres
+        run: pip install -q -e ".[dev]" && pytest -q

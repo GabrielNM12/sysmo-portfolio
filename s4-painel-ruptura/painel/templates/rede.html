@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Rede · visão do dia</h1>
+<p class="sub">Alertas ordenados por impacto financeiro. Clique na loja para ver o detalhe.</p>
+<div class="grade-lojas">
+{% for l in lojas %}
+  <a class="cartao-loja" href="/loja/{{ l.id }}">
+    <div class="cab"><strong>{{ l.fantasia }}</strong><span>{{ l.cidade }} · {{ l.num_pdvs }} PDVs</span></div>
+    <div class="linha"><span>Venda ontem</span><b>{{ l.kpis.venda_ontem | moeda }}</b></div>
+    <div class="linha"><span>Margem 30 dias</span><b>{{ l.kpis.margem_30d | pct }}</b></div>
+    <div class="linha alerta"><span>Venda perdida (ruptura)</span><b>{{ l.resumo.venda_perdida | moeda }}</b></div>
+    <div class="selos">
+      {% for t, n in l.resumo.por_tipo.items() %}<span class="selo t-{{ t }}">{{ NOME_TIPO[t] }} {{ n }}</span>{% endfor %}
+    </div>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}

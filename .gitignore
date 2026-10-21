@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+alertas_enviados.sqlite
+# Java / Maven
+target/
+*.class
+# Node
+node_modules/
+dist/
+# IDE / SO
+.idea/
+.vscode/
+*.iml
+.DS_Store

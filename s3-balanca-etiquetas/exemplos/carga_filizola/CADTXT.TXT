@@ -1,0 +1,127 @@
+001001PBANANA CATURRA GRANEL 0000411004                                                                                                                              0000
+001002PMANGA PALMER GRANEL   0002028004                                                                                                                              0000
+001003PMACA GALA GRANEL      0000401004                                                                                                                              0000
+001004PBERGAMOTA GRANEL      0000293004                                                                                                                              0000
+001005PPERA GRANEL           0000695004                                                                                                                              0000
+001006PMACA FUJI GRANEL      0001773004                                                                                                                              0000
+001007PBANANA PRATA GRANEL   0000950004                                                                                                                              0000
+001008PMELANCIA GRANEL       0001008004                                                                                                                              0000
+001009PMAMAO FORMOSA GRANEL  0000293004                                                                                                                              0000
+001010PLARANJA PERA GRANEL   0001489004                                                                                                                              0000
+001011PLIMAO TAITI GRANEL    0000371004                                                                                                                              0000
+001012PUVA NIAGARA GRANEL    0000479004                                                                                                                              0000
+001013PABACAXI GRANEL        0001910004                                                                                                                              0000
+001014PMELAO GRANEL          0000293004                                                                                                                              0000
+001015PLARANJA LIMA GRANEL   0002067004                                                                                                                              0000
+001016PPEPINO GRANEL         0000675003                                                                                                                              0000
+001017PBETERRABA GRANEL      0000283003                                                                                                                              0000
+001018PPIMENTAO VERDE GRANEL 0000234003                                                                                                                              0000
+001019PTOMATE CEREJA GRANEL  0000283003                                                                                                                              0000
+001020PCEBOLA GRANEL         0001087003                                                                                                                              0000
+001021PCENOURA GRANEL        0000675003                                                                                                                              0000
+001022PBATATA DOCE GRANEL    0000440003                                                                                                                              0000
+001023PCHUCHU GRANEL         0000754003                                                                                                                              0000
+001024PMANDIOCA GRANEL       0001224003                                                                                                                              0000
+001025PALHO GRANEL           0000891003                                                                                                                              0000
+001026PBATATA INGLESA GRANEL 0001312003                                                                                                                              0000
+001027PTOMATE GRANEL         0000852003                                                                                                                              0000
+001028PABOBORA CABOTIA GRANEL0000577003                                                                                                                              0000
+001029PREPOLHO GRANEL        0000195003                                                                                                                              0000
+001030PABOBRINHA GRANEL      0000910003                                                                                                                              0000
+001031PCARNE MOIDA DE PRIMEIR0006349004                                                                                                                              0015
+001032PCOXAO MOLE ACOUGUE PRO0006879004                                                                                                                              0015
+001033PCUPIM ACOUGUE PROPRIO 0002518004                                                                                                                              0015
+001034PCARNE MOIDA DE SEGUNDA0006428004                                                                                                                              0015
+001035PCONTRA FILE ACOUGUE PR0003125004                                                                                                                              0015
+001036PPALETA ACOUGUE PROPRIO0002557004                                                                                                                              0015
+001037PMAMINHA ACOUGUE PROPRI0002939004                                                                                                                              0015
+001038PPATINHO ACOUGUE PROPRI0002763004                                                                                                                              0015
+001039PACEM ACOUGUE PROPRIO  0008662004                                                                                                                              0015
+001040PMUSCULO ACOUGUE PROPRI0005987004                                                                                                                              0015
+001041PCOXAO DURO ACOUGUE PRO0005017004                                                                                                                              0015
+001042PCOSTELA ACOUGUE PROPRI0003311004                                                                                                                              0015
+001043PALCATRA ACOUGUE PROPRI0004311004                                                                                                                              0015
+001044PPICANHA ACOUGUE PROPRI0004566004                                                                                                                              0015
+001045PFRALDINHA ACOUGUE PROP0002249004                                                                                                                              0015
+001046PLINGUICA COLONIAL ACOU0001038004                                                                                                                              0015
+001047PCOSTELINHA SUINA ACOUG0002518004                                                                                                                              0015
+001048PPEITO DE FRANGO COOP P0003351004                                                                                                                              0015
+001049PCORACAO DE FRANGO FRIG0001263004                                                                                                                              0015
+001050PPERNIL SUINO FRIGORIFI0002772004                                                                                                                              0015
+001051PPEITO DE FRANGO FRIGOR0000881004                                                                                                                              0015
+001052PLOMBO SUINO COOP PEPER0003537004                                                                                                                              0015
+001053PLINGUICA COLONIAL COOP0000989004                                                                                                                              0015
+001054PFILE DE PEITO COOP PEP0000940004                                                                                                                              0015
+001055PLINGUICA CALABRESA COO0001214004                                                                                                                              0015
+001056PLINGUICA TOSCANA FRIGO0002057004                                                                                                                              0015
+001057PCOSTELINHA SUINA COOP 0002792004                                                                                                                              0015
+001058PPERNIL SUINO ACOUGUE P0002204004                                                                                                                              0015
+001059PLINGUICA TOSCANA COOP 0001440004                                                                                                                              0015
+001060PASA DE FRANGO COOP PEP0000969004                                                                                                                              0015
+001061PLOMBO SUINO FRIGORIFIC0002380004                                                                                                                              0015
+001062PCOSTELINHA SUINA FRIGO0000901004                                                                                                                              0015
+001063PFILE DE PEITO ACOUGUE 0001988004                                                                                                                              0015
+001064PCOXA E SOBRECOXA FRIGO0002753004                                                                                                                              0015
+001065PBISTECA SUINA FRIGORIF0003674004                                                                                                                              0015
+001066PCORACAO DE FRANGO COOP0003645004                                                                                                                              0015
+001067PLINGUICA CALABRESA ACO0003419004                                                                                                                              0015
+001068PASA DE FRANGO FRIGORIF0003076004                                                                                                                              0015
+001069PLOMBO SUINO ACOUGUE PR0000891004                                                                                                                              0015
+001070PLINGUICA CALABRESA FRI0001685004                                                                                                                              0015
+001071PCOXA E SOBRECOXA COOP 0000881004                                                                                                                              0015
+001072PPERNIL SUINO COOP PEPE0003223004                                                                                                                              0015
+001073PCOXA E SOBRECOXA ACOUG0001253004                                                                                                                              0015
+001074PPEITO DE FRANGO ACOUGU0001841004                                                                                                                              0015
+001075PFILE DE PEITO FRIGORIF0001959004                                                                                                                              0015
+001076PASA DE FRANGO ACOUGUE 0001244004                                                                                                                              0015
+001077PBISTECA SUINA COOP PEP0000881004                                                                                                                              0015
+001078PCORACAO DE FRANGO ACOU0002557004                                                                                                                              0015
+001079PBISTECA SUINA ACOUGUE 0001881004                                                                                                                              0015
+001080PLINGUICA TOSCANA ACOUG0001312004                                                                                                                              0015
+001081PLINGUICA COLONIAL FRIG0003694004                                                                                                                              0015
+001082PPAO FRANCES PADARIA PR0000871002                                                                                                                              0000
+001083PPAO DE QUEIJO PADARIA 0004291002                                                                                                                              0000
+001084PSALGADO ASSADO PADARIA0001743002                                                                                                                              0000
+001085PCUCA DE UVA PADARIA PR0003664002                                                                                                                              0000
+001086PPAO INTEGRAL PADARIA P0003017002                                                                                                                              0000
+001087PBOLO DE CENOURA PADARI0000979002                                                                                                                              0000
+001088PCUCA DE BANANA PADARIA0001253002                                                                                                                              0000
+001089PSONHO PADARIA PROPRIA 0003850002                                                                                                                              0000
+001090PTORTA SALGADA PADARIA 0004399002                                                                                                                              0000
+001091PPAO CASEIRO PADARIA PR0000822002                                                                                                                              0000
+001092PPAO DE MILHO PADARIA P0002449002                                                                                                                              0000
+001093PROSCA DOCE PADARIA PRO0004527002                                                                                                                              0000
+001094PCUCA ALEMA PADARIA PRO0001518002                                                                                                                              0000
+001095PBOLO DE CHOCOLATE PADA0000803002                                                                                                                              0000
+001096PPEITO DE PERU COOP PEP0008809006                                                                                                                              0008
+001097PQUEIJO PRATO FRIGORIFI0002459006                                                                                                                              0008
+001098PPRESUNTO COZIDO FRIGOR0004801006                                                                                                                              0008
+001099PQUEIJO MUSSARELA LATIC0004115006                                                                                                                              0008
+001100PQUEIJO MUSSARELA COLON0002478006                                                                                                                              0008
+001101PQUEIJO PRATO COOP PEPE0002763006                                                                                                                              0008
+001102PQUEIJO COLONIAL COOP P0004517006                                                                                                                              0008
+001103PQUEIJO MUSSARELA FRIGO0009603006                                                                                                                              0008
+001104PCOPA COLONIAL OESTE   0002753006                                                                                                                              0008
+001105PCOPA FRIGORIFICO OESTE0004644006                                                                                                                              0008
+001106PPEITO DE PERU COLONIAL0009505006                                                                                                                              0008
+001107PQUEIJO PRATO LATICINIO0003184006                                                                                                                              0008
+001108PMORTADELA FRIGORIFICO 0004850006                                                                                                                              0008
+001109PPRESUNTO COZIDO COOP P0002459006                                                                                                                              0008
+001110PSALAME ITALIANO COOP P0010544006                                                                                                                              0008
+001111PQUEIJO COLONIAL COLONI0004938006                                                                                                                              0008
+001112PQUEIJO COLONIAL FRIGOR0007241006                                                                                                                              0008
+001113PSALAME ITALIANO COLONI0005134006                                                                                                                              0008
+001114PMORTADELA COOP PEPERI 0006467006                                                                                                                              0008
+001115PMORTADELA COLONIAL OES0004487006                                                                                                                              0008
+001116PQUEIJO PRATO COLONIAL 0002890006                                                                                                                              0008
+001117PPEITO DE PERU FRIGORIF0004380006                                                                                                                              0008
+001118PPEITO DE PERU LATICINI0002645006                                                                                                                              0008
+001119PMORTADELA LATICINIOS S0005144006                                                                                                                              0008
+001120PCOPA LATICINIOS SERRAN0003409006                                                                                                                              0008
+001121PSALAME ITALIANO FRIGOR0003566006                                                                                                                              0008
+001122PCOPA COOP PEPERI      0002557006                                                                                                                              0008
+001123PPRESUNTO COZIDO COLONI0003880006                                                                                                                              0008
+001124PPRESUNTO COZIDO LATICI0003439006                                                                                                                              0008
+001125PQUEIJO COLONIAL LATICI0009564006                                                                                                                              0008
+001126PQUEIJO MUSSARELA COOP 0002469006                                                                                                                              0008
+001127PSALAME ITALIANO LATICI0006496006                                                                                                                              0008
