@@ -1,3 +1,7 @@
+# scripts executados dentro do container Linux: sempre LF, mesmo com clone no Windows
+*.sh  text eol=lf
+*.sql text eol=lf
+*.yml text eol=lf
 # arquivos de carga de balança: CRLF e largura fixa preservados byte a byte
 *.TXT -text
 *.pdf binary
